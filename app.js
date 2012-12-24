@@ -58,7 +58,9 @@ var mocp = function( option ) {
 
   app.get('/pause', mocp.pause );
   app.get('/play', mocp.play );
-  app.get('/*', mocp.toggle );
+  app.get('/toggle', mocp.toggle );
+  app.get('/controls', controls.display);
+  //app.get('/*', mocp.toggle );
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
