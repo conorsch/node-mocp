@@ -19,17 +19,20 @@ var mocp = function( option ) {
     });
 }
 
-//  app.get('/play', mocp('--play'));
+  mocp.play = function () {
+      mocp('--play');
+  };
+  mocp.pause = function () {
+      mocp('--pause');
+  };
 
-  app.get('/pause', function ( option ) {
-          mocp( '--pause' );
-          } );
-  app.get('/play', function ( option ) {
-          mocp( '--play' );
-          } );
-  app.get('/*', function ( option ) {
-          mocp( '--toggle-pause' );
-          } );
+  mocp.toggle = function () {
+      mocp('--toggle-pause');
+  };
+
+  app.get('/pause', mocp.pause );
+  app.get('/play', mocp.play );
+  app.get('/*', mocp.toggle );
 
 app.listen(3000);
 console.log('Listening on port 3000');
