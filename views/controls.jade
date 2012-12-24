@@ -2,8 +2,12 @@ extends layout
 
 block content
   h1= title
-  p BUTTON 1
-  p BUTTON 2
-  p hello there
+
+  form( name="input", action="toggle", method="get" )
+    input( type="submit", value="Play" )
+
+  form( name="input", action="toggle", method="get" )
+    input( type="submit", value="Pause" )
+
   form(name="input", action="toggle", method="get")
-    input(type="submit", value="Pause/Unpause")
+    input(type="submit", value="Toggle" )
