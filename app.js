@@ -27,13 +27,13 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/pause', mocp.pause );
-app.get('/play', mocp.play );
-app.get('/previous', mocp.previous );
-app.get('/next', mocp.next );
-app.get('/toggle', mocp.toggle );
-app.get('/volup', mocp.volup );
-app.get('/voldown', mocp.voldown );
+app.post('/pause', mocp.pause );
+app.post('/play', mocp.play );
+app.post('/previous', mocp.previous );
+app.post('/next', mocp.next );
+app.post('/toggle', mocp.toggle );
+app.post('/volup', mocp.volup );
+app.post('/voldown', mocp.voldown );
 
 app.get('/controls', controls.display);
 app.get('/', routes.index);
