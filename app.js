@@ -6,7 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
-  , mocp = require('./mocp.js')
+  , mocp = require('mocp')
   , http = require('http')
   , controls = require('./routes/controls')
   , path = require('path');
