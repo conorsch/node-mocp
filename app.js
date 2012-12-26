@@ -1,11 +1,10 @@
-
 /**
  * Module dependencies.
  */
 
 var express = require('express')
   , routes = require('./routes')
-  , user = require('./routes/user')
+  , mocp = require('mocp')
   , http = require('http')
   , controls = require('./routes/controls')
   , path = require('path');
@@ -28,60 +27,16 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/users', user.list);
+app.get('/pause', mocp.pause );
+app.get('/play', mocp.play );
+app.get('/previous', mocp.previous );
+app.get('/next', mocp.next );
+app.get('/toggle', mocp.toggle );
+app.get('/volup', mocp.volup );
+app.get('/voldown', mocp.voldown );
 
-var mocp = function( option ) {
-
-    var exec = require('child_process').exec,
-        child;
-
-    child = exec('mocp ' + option,
-      function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-        if (error !== null) {
-          console.log('exec error: ' + error);
-        }
-    });
-}
-
-  mocp.play = function () {
-      mocp('--play');
-  };
-  mocp.pause = function () {
-      mocp('--pause');
-  };
-
-  mocp.toggle = function () {
-      mocp('--toggle-pause');
-  };
-
-  mocp.volup = function () {
-      mocp('--volume +10');
-  };
-
-  mocp.voldown = function () {
-      mocp('--volume -10');
-  };
-
-  mocp.next = function () {
-      mocp('--next');
-  };
-  mocp.previous = function () {
-      mocp('--previous');
-  };
-
-  app.get('/pause', mocp.pause );
-  app.get('/play', mocp.play );
-  app.get('/previous', mocp.previous );
-  app.get('/next', mocp.next );
-  app.get('/toggle', mocp.toggle );
-  app.get('/volup', mocp.volup );
-  app.get('/voldown', mocp.voldown );
-
-
-  app.get('/controls', controls.display);
-  app.get('/', routes.index);
+app.get('/controls', controls.display);
+app.get('/', routes.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
