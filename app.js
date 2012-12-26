@@ -56,9 +56,19 @@ var mocp = function( option ) {
       mocp('--toggle-pause');
   };
 
+  mocp.volup = function () {
+      mocp('--volume +10');
+  };
+
+  mocp.voldown = function () {
+      mocp('--volume -10');
+  };
+
   app.get('/pause', mocp.pause );
   app.get('/play', mocp.play );
   app.get('/toggle', mocp.toggle );
+  app.get('/volup', mocp.volup );
+  app.get('/voldown', mocp.voldown );
   app.get('/controls', controls.display);
   app.get('/', routes.index);
 
