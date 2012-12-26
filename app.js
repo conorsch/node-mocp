@@ -64,11 +64,22 @@ var mocp = function( option ) {
       mocp('--volume -10');
   };
 
+  mocp.next = function () {
+      mocp('--next');
+  };
+  mocp.previous = function () {
+      mocp('--previous');
+  };
+
   app.get('/pause', mocp.pause );
   app.get('/play', mocp.play );
+  app.get('/previous', mocp.previous );
+  app.get('/next', mocp.next );
   app.get('/toggle', mocp.toggle );
   app.get('/volup', mocp.volup );
   app.get('/voldown', mocp.voldown );
+
+
   app.get('/controls', controls.display);
   app.get('/', routes.index);
 
