@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , mocp = require('./mocp.js')
   , http = require('http')
   , controls = require('./routes/controls')
   , path = require('path');
@@ -30,46 +31,6 @@ app.configure('development', function(){
 
 app.get('/users', user.list);
 
-var mocp = function( option ) {
-
-    var exec = require('child_process').exec,
-        child;
-
-    child = exec('mocp ' + option,
-      function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-        if (error !== null) {
-          console.log('exec error: ' + error);
-        }
-    });
-}
-
-  mocp.play = function () {
-      mocp('--play');
-  };
-  mocp.pause = function () {
-      mocp('--pause');
-  };
-
-  mocp.toggle = function () {
-      mocp('--toggle-pause');
-  };
-
-  mocp.volup = function () {
-      mocp('--volume +10');
-  };
-
-  mocp.voldown = function () {
-      mocp('--volume -10');
-  };
-
-  mocp.next = function () {
-      mocp('--next');
-  };
-  mocp.previous = function () {
-      mocp('--previous');
-  };
 
   app.get('/pause', mocp.pause );
   app.get('/play', mocp.play );
