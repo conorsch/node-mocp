@@ -27,13 +27,23 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.post('/pause', mocp.pause );
-app.post('/play', mocp.play );
-app.post('/previous', mocp.previous );
-app.post('/next', mocp.next );
-app.post('/toggle', mocp.toggle );
-app.post('/volup', mocp.volup );
-app.post('/voldown', mocp.voldown );
+var routes_fat = [ 
+  'pause', 
+  'play', 
+  'next',
+  'previous',
+  'next',
+  'toggle',
+  'volup',
+  'voldown',
+];
+
+routes_fat.forEach( function (route) { 
+  app.get('/' + route, function (req, res) { 
+    mocp[route](); // interpolate route name from array (above);
+    res.send(''); // throw something at client;
+  });
+}); 
 
 app.get('/controls', controls.display);
 app.get('/', routes.index);
